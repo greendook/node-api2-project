@@ -10,6 +10,7 @@ server.get('/', (req, res) => {
   res.send(`Hello!`);
 });
 
-server.listen(4000, () => {
-  console.log('\n*** Server Running on http://localhost:4000 ***\n');
+const port = process.env.PORT || 5500; // use the port if not grab 5000
+server.listen(port, () => {
+  console.log(`\n*** Server Running on http://localhost:${port} ***\n`);
 });

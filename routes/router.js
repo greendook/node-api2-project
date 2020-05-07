@@ -66,8 +66,15 @@ router.post('/:id/comments', (req, res) => {
   } else {
     Posts.findById(req.params.id).then((post) => {
       if (post.length) {
-        Posts.insertComment(req.body, req.params.id);
-        res.status(201).json(comment);
+        console.log(post);
+        Posts.insertComment({ ...req.body, post_id: post[0].id })
+          .then((comment) => {
+            console.log(comment);
+            res.status(201).json(comment);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
         res.status(404).json({ message: 'Post not found' });
       }
